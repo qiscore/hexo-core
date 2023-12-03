@@ -1,15 +1,15 @@
 # Site
-title: reller Room
+title: qiscore
 subtitle: ''
 description: ''
 keywords:
-author: qis
+author: qiscore
 language: zh-CN
 timezone: 'Asia/Shanghai'
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: http://example.com
+url: https://qiscore.github.io
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
@@ -95,7 +95,7 @@ ignore:
 ## Themes: https://hexo.io/themes/
 theme: fluid
 navbar:
-  blog_title: reller
+  blog_title: qiscore
 index:
   slogan:
     enable: true
