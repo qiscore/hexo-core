@@ -99,7 +99,7 @@ navbar:
 index:
   slogan:
     enable: true
-    text: 落红不是无情物，化作春泥更护花
+    text: 每天进步一点点
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
