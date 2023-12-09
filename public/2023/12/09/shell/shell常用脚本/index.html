@@ -1,0 +1,672 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="qiscore">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="1. 安装java环境1. 准备jdk安装包，environment.txt 环境变量配置文件12345678export JAVA_HOME&#x3D;&#x2F;usr&#x2F;local&#x2F;software&#x2F;jdk1.8.0_231export PATH&#x3D;$PATH:$JAVA_HOME&#x2F;binexport CLASSPATH&#x3D;.:$JAVA_HOME&#x2F;lib&#x2F;dt.jar:$JAVA_HOME&#x2F;lib&#x2F;tools.ja">
+<meta property="og:type" content="article">
+<meta property="og:title" content="shell常用脚本">
+<meta property="og:url" content="https://qiscore.github.io/2023/12/09/shell/shell%E5%B8%B8%E7%94%A8%E8%84%9A%E6%9C%AC/index.html">
+<meta property="og:site_name" content="qiscore">
+<meta property="og:description" content="1. 安装java环境1. 准备jdk安装包，environment.txt 环境变量配置文件12345678export JAVA_HOME&#x3D;&#x2F;usr&#x2F;local&#x2F;software&#x2F;jdk1.8.0_231export PATH&#x3D;$PATH:$JAVA_HOME&#x2F;binexport CLASSPATH&#x3D;.:$JAVA_HOME&#x2F;lib&#x2F;dt.jar:$JAVA_HOME&#x2F;lib&#x2F;tools.ja">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-12-09T06:32:11.000Z">
+<meta property="article:modified_time" content="2023-12-09T07:06:12.801Z">
+<meta property="article:author" content="qiscore">
+<meta property="article:tag" content="shell">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>shell常用脚本 - qiscore</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"qiscore.github.io","root":"/","version":"1.9.5-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>qiscore</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>主页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-plan"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/bg1.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="shell常用脚本"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-12-09 14:32" pubdate>
+          2023年12月9日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          7.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          61 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">shell常用脚本</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="1-安装java环境"><a href="#1-安装java环境" class="headerlink" title="1. 安装java环境"></a>1. 安装java环境</h1><h2 id="1-准备jdk安装包，environment-txt-环境变量配置文件"><a href="#1-准备jdk安装包，environment-txt-环境变量配置文件" class="headerlink" title="1. 准备jdk安装包，environment.txt 环境变量配置文件"></a>1. 准备jdk安装包，environment.txt 环境变量配置文件</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs shell"><br><br>export JAVA_HOME=/usr/local/software/jdk1.8.0_231<br>export PATH=$PATH:$JAVA_HOME/bin<br>export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar<br>export JRE_HOME=$JAVA_HOME/jre<br><br><br></code></pre></td></tr></table></figure>
+
+<h2 id="2-准备脚本jdk-install-sh"><a href="#2-准备脚本jdk-install-sh" class="headerlink" title="2. 准备脚本jdk-install.sh"></a>2. 准备脚本jdk-install.sh</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">!/bin/bash</span><br><br>echo &quot;解压jdk&quot;<br>tar -zxvf jdk-8u231-linux-x64.tar.gz<br><br>cat environment.txt &gt;&gt; ~/.bash_profile<br>source ~/.bash_profile<br>java -version<br><br><br></code></pre></td></tr></table></figure>
+
+<h2 id="3-执行脚本"><a href="#3-执行脚本" class="headerlink" title="3. 执行脚本"></a>3. 执行脚本</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">sh jdk-install.sh<br><br></code></pre></td></tr></table></figure>
+
+<h1 id="2-安装nginx"><a href="#2-安装nginx" class="headerlink" title="2. 安装nginx"></a>2. 安装nginx</h1><h2 id="1-准备脚本nginx-install-sh"><a href="#1-准备脚本nginx-install-sh" class="headerlink" title="1. 准备脚本nginx-install.sh"></a>1. 准备脚本nginx-install.sh</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">!/bin/bash</span><br><br>software_dir=/usr/local/software<br>nginx_dir=$software_dir/nginx<br>mkdir -p $nginx_dir<br>chmod -R 755 $nginx_dir<br><br>cd $nginx_dir <br><br>echo &quot;安装依赖包&quot;<br>yum -y install gcc zlib zlib-devel pcre-devel openssl openssl-devel wget<br>wget http://nginx.org/download/nginx-1.23.2.tar.gz<br><br>tar -xvf nginx-1.23.2.tar.gz<br><br>cd $nginx_dir/nginx-1.23.2<br><br>echo &quot;安装SSL模块&quot;<br>./configure --prefix=$nginx_dir --with-http_stub_status_module --with-http_ssl_module<br><br>make<br>make install<br><br><br>echo &quot;创建启动脚本&quot;<br><br>tee $nginx_dir/startup.sh &lt;&lt;-&#x27;EOF&#x27;<br><br>software_dir=/usr/local/software<br>nginx_dir=$software_dir/nginx<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">$</span><span class="language-bash">nginx_dir/sbin/nginx -c <span class="hljs-variable">$nginx_dir</span>/conf/nginx.conf</span><br><br>EOF<br><br>chmod 755 $nginx_dir/startup.sh<br><br>echo &quot;创建停止脚本&quot;<br>tee $nginx_dir/stop.sh &lt;&lt;-&#x27;EOF&#x27;<br><br>software_dir=/usr/local/software<br>nginx_dir=$software_dir/nginx<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">$</span><span class="language-bash">nginx_dir/sbin/nginx -s stop</span><br><br>EOF<br>   <br>chmod 755 $nginx_dir/stop.sh<br><br><br>echo &quot;创建重启脚本&quot;<br>tee $nginx_dir/restart.sh &lt;&lt;-&#x27;EOF&#x27;<br><br>sh stop.sh<br>sh startup.sh<br><br>EOF<br><br>chmod 755 $nginx_dir/restart.sh<br><span class="hljs-meta prompt_">#</span><span class="language-bash">在文件首行插入内容</span><br>sed -i &#x27;1i\#!/bin/bash&#x27; $nginx_dir/*.sh<br><br>mv $software_dir/nginx-install.sh $nginx_dir<br><br>echo &quot;开放tcp/ip端口80-25535&quot;<br>firewall-cmd --zone=public --add-port=80-25535/tcp --permanent<br>firewall-cmd --reload<br><br></code></pre></td></tr></table></figure>
+
+<h2 id="2-执行脚本"><a href="#2-执行脚本" class="headerlink" title="2 . 执行脚本"></a>2 . 执行脚本</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">sh nginx-install.sh<br><br></code></pre></td></tr></table></figure>
+
+
+<h1 id="3-安装docker"><a href="#3-安装docker" class="headerlink" title="3. 安装docker"></a>3. 安装docker</h1><h2 id="1-准备脚本docker-install-sh"><a href="#1-准备脚本docker-install-sh" class="headerlink" title="1.  准备脚本docker-install.sh"></a>1.  准备脚本docker-install.sh</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">!/bin/bash</span><br>sudo yum remove docker*<br>echo &quot;安装必要软件包&quot;<br><br>sudo yum install -y yum-utils device-mapper-persistent-data lvm2<br><br>echo &quot;Step 2: 添加软件源信息&quot;<br>sudo yum-config-manager --add-repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo<br>sudo sed -i &#x27;s+download.docker.com+mirrors.aliyun.com/docker-ce+&#x27; /etc/yum.repos.d/docker-ce.repo<br>echo &quot;更新并安装Docker-CE-20.10.17&quot;<br>sudo yum makecache fast<br>sudo yum -y install docker-ce-20.10.12-3.el7<br>echo &quot;设置开机启动&quot;<br>systemctl enable docker --now<br>echo &quot;配置镜像加速器&quot;<br>sudo mkdir -p /etc/docker<br>sudo tee /etc/docker/daemon.json &lt;&lt;-&#x27;EOF&#x27;<br>&#123;<br> &quot;registry-mirrors&quot;: [&quot;https://y96pbacg.mirror.aliyuncs.com&quot;]<br>&#125;<br>EOF<br>sudo systemctl daemon-reload<br>sudo systemctl restart docker<br><span class="hljs-meta prompt_">#</span><span class="language-bash">更新系统时间</span><br>echo &quot;同步系统时间&quot;<br>yum install ntpdate -y<br>ntpdate cn.pool.ntp.org<br><br><br></code></pre></td></tr></table></figure>
+
+<h2 id="2-执行脚本-1"><a href="#2-执行脚本-1" class="headerlink" title="2. 执行脚本"></a>2. 执行脚本</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">sh docker-install.sh<br><br></code></pre></td></tr></table></figure>
+
+<h1 id="4-安装k8s集群"><a href="#4-安装k8s集群" class="headerlink" title="4. 安装k8s集群"></a>4. 安装k8s集群</h1><h2 id="1-安装docker"><a href="#1-安装docker" class="headerlink" title="1 . 安装docker"></a>1 . 安装docker</h2><p>略</p>
+<h2 id="2-规划集群节点"><a href="#2-规划集群节点" class="headerlink" title="2. 规划集群节点"></a>2. 规划集群节点</h2><p>主节点master：172.20.10.2<br>从节点slave：172.20.10.4</p>
+<h2 id="3-准备脚本k8s-install-sh"><a href="#3-准备脚本k8s-install-sh" class="headerlink" title="3. 准备脚本k8s-install.sh"></a>3. 准备脚本k8s-install.sh</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">!/bin/bash</span><br>echo &quot;--------------------step-1 初始化环境-------------------------&quot;<br>echo &quot;设置节点的hostname&quot;<br>node_hostname=$1<br>hostnamectl set-hostname $node_hostname<br><br>echo &quot;将 SELinux 设置为 permissive 模式（相当于将其禁用）&quot;<br><span class="hljs-meta prompt_"># </span><span class="language-bash">将 SELinux 设置为 permissive 模式（相当于将其禁用）</span><br>sudo setenforce 0<br>sudo sed -i &#x27;s/^SELINUX=enforcing$/SELINUX=permissive/&#x27; /etc/selinux/config<br><br>echo &quot;关闭swap&quot;<br><span class="hljs-meta prompt_">#</span><span class="language-bash">关闭swap</span><br>swapoff -a  <br>sed -ri &#x27;s/.*swap.*/#&amp;/&#x27; /etc/fstab<br><br>echo &quot;允许 iptables 检查桥接流量&quot;<br><span class="hljs-meta prompt_">#</span><span class="language-bash">允许 iptables 检查桥接流量</span><br>cat &lt;&lt;EOF | sudo tee /etc/modules-load.d/k8s.conf<br>br_netfilter<br>EOF<br><br>cat &lt;&lt;EOF | sudo tee /etc/sysctl.d/k8s.conf<br>net.bridge.bridge-nf-call-ip6tables = 1<br>net.bridge.bridge-nf-call-iptables = 1<br>EOF<br>sudo sysctl --system<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">放行端口</span><br>sudo tee ./turnon-port.sh &lt;&lt;-&#x27;EOF&#x27;<br><span class="hljs-meta prompt_">#</span><span class="language-bash">打开端口</span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">!/bin/bash</span><br>echo &quot;Open firewall port $1&quot;<br>firewall-cmd --zone=public --add-port=$1/tcp --permanent<br>firewall-cmd --reload<br>firewall-cmd --zone=public --list-ports<br>EOF<br>chmod 755 ./turnon-port.sh<br>sh ./turnon-port.sh 30000-32796<br>iptables -P INPUT ACCEPT<br>iptables -P FORWARD ACCEPT<br>iptables -P OUTPUT ACCEPT<br>iptables -F<br>systemctl restart docker<br><span class="hljs-meta prompt_">#</span><span class="language-bash">更新系统时间</span><br>echo &quot;同步系统时间&quot;<br>yum install ntpdate -y<br>ntpdate cn.pool.ntp.org<br><br>rm -rf /etc/containerd/config.toml<br>systemctl restart containerd<br><br>echo &quot;--------------------step-2 安装kubelet、kubeadm、kubectl-------------------------&quot;<br><br>cat &lt;&lt;EOF | sudo tee /etc/yum.repos.d/kubernetes.repo<br>[kubernetes]<br>name=Kubernetes<br>baseurl=http://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64<br>enabled=1<br>gpgcheck=0<br>repo_gpgcheck=0<br>gpgkey=http://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg<br>   http://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg<br>exclude=kubelet kubeadm kubectl<br>EOF<br><br><br>sudo yum install -y kubelet-1.20.9 kubeadm-1.20.9 kubectl-1.20.9 --disableexcludes=kubernetes<br>echo &quot;设置kubelet开机启动&quot;<br>sudo systemctl enable --now kubelet<br><br><br>echo &quot;--------------------step-3 使用kubeadmin引导集群， 下载各个机器需要的镜像-------------------------&quot;<br>sudo tee ./images.sh &lt;&lt;-&#x27;EOF&#x27;<br><span class="hljs-meta prompt_">#</span><span class="language-bash">!/bin/bash</span><br>images=(<br>kube-apiserver:v1.20.9<br>kube-proxy:v1.20.9<br>kube-controller-manager:v1.20.9<br>kube-scheduler:v1.20.9<br>coredns:1.7.0<br>etcd:3.4.13-0<br>pause:3.2<br>)<br>for imageName in $&#123;images[@]&#125; ; do<br>docker pull registry.aliyuncs.com/google_containers/$imageName<br>done<br>EOF<br>   <br>chmod +x ./images.sh &amp;&amp; ./images.sh<br><br>echo &quot;所有机器添加master域名映射&quot;<br>echo &quot;172.20.10.2  cluster-endpoint&quot; &gt;&gt; /etc/hosts<br>echo &quot;172.20.10.2  master&quot; &gt;&gt; /etc/hosts<br>echo &quot;172.20.10.4  slave&quot; &gt;&gt; /etc/hosts<br><br><br>current_hostname=$(hostname)<br><br>if [ &quot;$&#123;current_hostname&#125;&quot;x = &quot;master&quot;x ];then<br>	echo &quot;主节点初始化&quot;<br>	kubeadm init \<br>	--apiserver-advertise-address=172.20.10.2 \<br>	--control-plane-endpoint=cluster-endpoint \<br>	--image-repository registry.aliyuncs.com/google_containers \<br>	--kubernetes-version v1.20.9 \<br>	--service-cidr=10.96.0.0/16 \<br>	--pod-network-cidr=192.168.0.0/16<br>	<br>	echo &quot;设置kube config&quot;<br>	mkdir -p $HOME/.kube<br>	sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config<br>	sudo chown $(id -u):$(id -g) $HOME/.kube/config<br>	<br>	echo &quot;安装网络插件&quot;<br>	curl https://docs.projectcalico.org/v3.20/manifests/calico.yaml -O<br>	kubectl apply -f calico.yaml<br>	<br>	echo &quot;请在work节点执行kubeadmin join命令加入节点&quot;	<br>fi<br><br><br></code></pre></td></tr></table></figure>
+
+<h2 id="4-主节点执行脚本进行初始化集群"><a href="#4-主节点执行脚本进行初始化集群" class="headerlink" title="4.  主节点执行脚本进行初始化集群"></a>4.  主节点执行脚本进行初始化集群</h2><p><code>sh k8s-install.sh master</code></p>
+<h2 id="5-从节点执行脚本初始化集群，并加入主节点的集群-执行主节点初始化结果，有个命令，拷贝过来，在从节点初始化后执行"><a href="#5-从节点执行脚本初始化集群，并加入主节点的集群-执行主节点初始化结果，有个命令，拷贝过来，在从节点初始化后执行" class="headerlink" title="5.  从节点执行脚本初始化集群，并加入主节点的集群(执行主节点初始化结果，有个命令，拷贝过来，在从节点初始化后执行)"></a>5.  从节点执行脚本初始化集群，并加入主节点的集群(执行主节点初始化结果，有个命令，拷贝过来，在从节点初始化后执行)</h2><p><code>sh k8s-install.sh slave</code></p>
+<h1 id="5-安装nfs"><a href="#5-安装nfs" class="headerlink" title="5. 安装nfs"></a>5. 安装nfs</h1><h2 id="1-规划nfs节点"><a href="#1-规划nfs节点" class="headerlink" title="1.  规划nfs节点"></a>1.  规划nfs节点</h2><p>server节点: 172.20.10.2</p>
+<p>client节点: 172.20.10.4</p>
+<h2 id="2-准备安装脚本nfs-install-sh-可同时用于server端和client端"><a href="#2-准备安装脚本nfs-install-sh-可同时用于server端和client端" class="headerlink" title="2.  准备安装脚本nfs-install.sh, 可同时用于server端和client端"></a>2.  准备安装脚本nfs-install.sh, 可同时用于server端和client端</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">/bin/bash</span><br><br>echo &quot;安装依赖nfs-utils nfs-common：&quot;<br>yum install -y nfs-utils nfs-common<br><br>FILE_PATH=/nfs/data<br>SERVER_TYPE=$1<br><br>if [ &quot;$&#123;SERVER_TYPE&#125;&quot;x = &quot;server&quot;x ];then<br><span class="hljs-meta prompt_">	#</span><span class="language-bash">nfs服务节点</span><br>	echo &quot;$FILE_PATH *(insecure,rw,sync,no_root_squash)&quot; &gt; /etc/exports<br>	mkdir -p /nfs/data<br>	systemctl enable rpcbind --now<br>	systemctl enable nfs-server --now<br>	systemctl start rpcbind<br>	systemctl start nfs-server<br><span class="hljs-meta prompt_">	#</span><span class="language-bash">配置生效</span><br>	exportfs -r<br>fi<br><br>if [ &quot;$&#123;SERVER_TYPE&#125;&quot;x = &quot;client&quot;x ];then<br>    SERVER_IP=$2<br><span class="hljs-meta prompt_">	#</span><span class="language-bash">nfs客户端节点</span><br>	showmount -e $SERVER_IP<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">	#</span><span class="language-bash">执行以下命令挂载 nfs 服务器上的共享目录到本机路径 /root/nfsmount</span><br>	mkdir -p $FILE_PATH<br>	mount -t nfs $SERVER_IP:$FILE_PATH $FILE_PATH<br><span class="hljs-meta prompt_">	#</span><span class="language-bash">验证挂载生效</span><br><span class="hljs-meta prompt_">	# </span><span class="language-bash">写入一个测试文件</span><br>	echo &quot;hello nfs server&quot; &gt; $FILE_PATH/example.txt<br>	echo &quot;please to the nfs server of $SERVER_IP read $FILE_PATH/example.txt&quot;<br>fi<br><br></code></pre></td></tr></table></figure>
+
+<h2 id="3-安装server端，执行脚本"><a href="#3-安装server端，执行脚本" class="headerlink" title="3. 安装server端，执行脚本"></a>3. 安装server端，执行脚本</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell"><br>sh nfs-install.sh server<br><br></code></pre></td></tr></table></figure>
+
+<h2 id="4-安装client端，指定server的ip地址，执行脚本"><a href="#4-安装client端，指定server的ip地址，执行脚本" class="headerlink" title="4. 安装client端，指定server的ip地址，执行脚本"></a>4. 安装client端，指定server的ip地址，执行脚本</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell"><br>sh nfs-install.sh client 172.20.10.2<br><br></code></pre></td></tr></table></figure>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/shell/" class="category-chain-item">shell</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/shell/" class="print-no-link">#shell</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>shell常用脚本</div>
+      <div>https://qiscore.github.io/2023/12/09/shell/shell常用脚本/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>qiscore</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年12月9日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/12/09/docker/docker%E5%B8%B8%E7%94%A8%E5%AE%B9%E5%99%A8%E5%88%9B%E5%BB%BA/" title="docker常用容器创建">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">docker常用容器创建</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/12/09/shell/shell%E7%BC%96%E7%A8%8B%E8%AF%AD%E6%B3%95/" title="shell编程语法">
+                        <span class="hidden-mobile">shell编程语法</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

@@ -1,3 +1,4 @@
+banner_img: /img/bg1.jpg
 # Site
 title: qiscore
 subtitle: ''
@@ -86,7 +87,7 @@ pagination_dir: page
 
 # Include / Exclude file(s)
 ## include:/exclude: options only apply to the 'source/' folder
-include:
+include: 
 exclude:
 ignore:
 
@@ -94,12 +95,22 @@ ignore:
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 theme: fluid
+post:
+ banner_img: /img/bg1.jpg
 navbar:
   blog_title: qiscore
+
+  menu:
+    - { key: 'home', link: '/', icon: 'iconfont icon-home-fill', name: '主页' }
+    - { key: 'tag', link: '/tags/', icon: 'iconfont icon-tags-fill', name: '标签' }
+    - { key: 'categories', link: '/categories/', icon: 'iconfont icon-category', name: '分类' }
+    - { key: 'archives', link: '/archives/', icon: 'iconfont icon-plan', name: '归档' }
+    - { key: 'about', link: '/about/', icon: 'iconfont icon-user-fill', name: '关于' }  
 index:
   slogan:
     enable: true
-    text: 每天进步一点点
+    text: 天之道，损有余而补不足;人之道，损不足以奉有余
+  post_url_target: _blank  
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
